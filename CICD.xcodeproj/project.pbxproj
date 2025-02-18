@@ -15,6 +15,7 @@
 		51755C2E2D64A50B008D654D /* CICDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51755C2D2D64A50B008D654D /* CICDTests.swift */; };
 		51755C382D64A50B008D654D /* CICDUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51755C372D64A50B008D654D /* CICDUITests.swift */; };
 		51755C3A2D64A50B008D654D /* CICDUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51755C392D64A50B008D654D /* CICDUITestsLaunchTests.swift */; };
+		51755C492D64B059008D654D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 51755C482D64B059008D654D /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		51755C332D64A50B008D654D /* CICDUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CICDUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		51755C372D64A50B008D654D /* CICDUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICDUITests.swift; sourceTree = "<group>"; };
 		51755C392D64A50B008D654D /* CICDUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICDUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		51755C482D64B059008D654D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		51755C0E2D64A509008D654D = {
 			isa = PBXGroup;
 			children = (
+				51755C482D64B059008D654D /* README.md */,
 				51755C192D64A509008D654D /* CICD */,
 				51755C2C2D64A50B008D654D /* CICDTests */,
 				51755C362D64A50B008D654D /* CICDUITests */,
@@ -235,6 +238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51755C492D64B059008D654D /* README.md in Resources */,
 				51755C242D64A50A008D654D /* Preview Assets.xcassets in Resources */,
 				51755C212D64A50A008D654D /* Assets.xcassets in Resources */,
 			);
