@@ -13,7 +13,7 @@ workflows:
         #   - ios_distribution.p12
         distribution_type: app_store # or: app_store | ad_hoc | development | enterprise
         bundle_identifier: qa.vodafone.mcare.test1
-      # vars:
+      vars:
         BUNDLE_ID: "qa.vodafone.mcare.test1"
         # XCODE_PROJECT: "CICD.xcworkspace"
         XCODE_PROJECT: "CICD.xcodeproj"
