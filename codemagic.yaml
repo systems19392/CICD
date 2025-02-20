@@ -47,6 +47,8 @@ workflows:
           xcode-project build-ipa \
             --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
             --scheme "$XCODE_SCHEME"
+            --custom-export-options='{"testFlightInternalTestingOnly": true}' \
+            --verbose  # Enables detailed logs for debugging
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
