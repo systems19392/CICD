@@ -3,19 +3,19 @@ workflows:
     name: MVA Test One 
     max_build_duration: 120
     instance_type: mac_mini_m2
-    # integrations:
-    #   app_store_connect: MVA AppStore Connect
+    integrations:
+      app_store_connect: MVA AppStore Connect
     environment:
       ios_signing:
         # provisioning_profiles:
-        #   -
+        #   - YourAppProfile.mobileprovision
         # certificates:
-        #   - 
+        #   - ios_distribution.p12
         distribution_type: app_store # or: app_store | ad_hoc | development | enterprise
         bundle_identifier: qa.vodafone.mcare.test1
       # vars:
-        BUNDLE_ID: "iqa.vodafone.mcare.test1"
-        # XCODE_WORKSPACE: "CICD.xcworkspace"
+        BUNDLE_ID: "qa.vodafone.mcare.test1"
+        # XCODE_PROJECT: "CICD.xcworkspace"
         XCODE_PROJECT: "CICD.xcodeproj"
         XCODE_SCHEME: "CICD"
         APP_STORE_APPLE_ID: 1480230006
@@ -37,15 +37,14 @@ workflows:
       - name: Set up provisioning profiles settings on Xcode project
         script: xcode-project use-profiles
                         # --custom-export-options='{"testFlightInternalTestingOnly": true}'  
-      # - name: Increment build number
-      #   script: |
-      #     cd $CM_BUILD_DIR
-      #     LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID")
-      #     agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
+      - name: Increment build number
+        script: |
+          cd $CM_BUILD_DIR
+          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build-number "$APP_STORE_APPLE_ID")
+          agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
       - name: Build ipa for distribution
         script: |
           xcode-project build-ipa \
-            # --workspace "$CM_BUILD_DIR/$XCODE_WORKSPACE" \
             --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
             --scheme "$XCODE_SCHEME"
     artifacts:
@@ -53,20 +52,20 @@ workflows:
       - /tmp/xcodebuild_logs/*.log
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
-    # publishing:
-    #   email:
-    #     recipients:
-    #       - atif.saeed@systemsltd.com
-    #       - atifsaeed14@gmail.com
+    publishing:
+      email:
+        recipients:
+          - atif.saeed@systemsltd.com
+          - atifsaeed14@gmail.com
     #     notify:
     #       success: true
     #       failure: false
-    #   app_store_connect:
-    #     auth: MVA AppStore Connect
+      app_store_connect:
+        auth: integration
 
     #     # Configuration related to TestFlight (optional)
     #     # Note: This action is performed during post-processing.
-    #     submit_to_testflight: true
+        submit_to_testflight: true
     #     # beta_groups: # Specify the names of beta tester groups that will get access to the build once it has passed beta review.
     #     #   - group name 1
     #     #   - group name 2
