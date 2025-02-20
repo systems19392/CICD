@@ -14,12 +14,12 @@ workflows:
         distribution_type: app_store # or: app_store | ad_hoc | development | enterprise
         bundle_identifier: qa.vodafone.mcare.test1
       # vars:
-      #   BUNDLE_ID: "iqa.vodafone.mcare.test1"
-      #   # XCODE_WORKSPACE: "CICD.xcworkspace"
-      #   XCODE_PROJECT: "CICD.xcodeproj"
-      #   XCODE_SCHEME: "CICD"
-      #   # APP_STORE_APPLE_ID: 1480230006
-      # xcode: latest # <-- set to specific version e.g. 14.3, 15.0 to avoid unexpected updates.
+        BUNDLE_ID: "iqa.vodafone.mcare.test1"
+        # XCODE_WORKSPACE: "CICD.xcworkspace"
+        XCODE_PROJECT: "CICD.xcodeproj"
+        XCODE_SCHEME: "CICD"
+        APP_STORE_APPLE_ID: 1480230006
+      xcode: latest # <-- set to specific version e.g. 14.3, 15.0 to avoid unexpected updates.
       # cocoapods: default
     # triggering:
     #     events:
@@ -38,16 +38,16 @@ workflows:
         script: xcode-project use-profiles
                         # --custom-export-options='{"testFlightInternalTestingOnly": true}'  
       # - name: Increment build number
-      #   script: | 
+      #   script: |
       #     cd $CM_BUILD_DIR
       #     LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID")
       #     agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
-      # - name: Build ipa for distribution
-      #   script: | 
-      #     xcode-project build-ipa \
-      #       # --workspace "$CM_BUILD_DIR/$XCODE_WORKSPACE" \
-      #       --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
-      #       --scheme "$XCODE_SCHEME"
+      - name: Build ipa for distribution
+        script: |
+          xcode-project build-ipa \
+            # --workspace "$CM_BUILD_DIR/$XCODE_WORKSPACE" \
+            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME"
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
