@@ -12,7 +12,7 @@ workflows:
         # certificates:
         #   - 
         distribution_type: app_store # or: app_store | ad_hoc | development | enterprise
-        bundle_identifier: iqa.vodafone.mcare.test1
+        bundle_identifier: qa.vodafone.mcare.test1
       # vars:
       #   BUNDLE_ID: "iqa.vodafone.mcare.test1"
       #   # XCODE_WORKSPACE: "CICD.xcworkspace"
