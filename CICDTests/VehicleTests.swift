@@ -44,7 +44,7 @@ final class VehicleTests: XCTestCase {
         boeing.startEngine(minutes: minutes)
         
         //Assert
-        XCTAssertTrue(boeing.returnMiles() < mercedes.returnMiles())
+        XCTAssertTrue(boeing.returnMiles() > mercedes.returnMiles())
     }
 
     func testPerformanceExample() throws {
