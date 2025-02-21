@@ -1,4 +1,31 @@
 workflows:
+  ios-mva-test-one-cases:
+    name: MVA Test One Cases 
+    environment:
+      vars:
+        BUNDLE_ID: "qa.vodafone.mcare.test1"
+        # XCODE_PROJECT: "CICD.xcworkspace"
+        XCODE_PROJECT: "CICD.xcodeproj"
+        XCODE_SCHEME: "CICD"
+        # APP_STORE_APPLE_ID: 1480230006
+      xcode: latest # <-- set to specific version e.g. 14.3, 15.0 to avoid unexpected updates.
+      # cocoapods: default
+    
+    scripts:
+      # - name: Install CocoaPods dependencies
+      #   script: | 
+      #     pod install
+      - name: iOS test
+        script: |
+          xcode-project run-tests \
+            --workspace CICD.xcodeproj \
+            --scheme CICD
+      # test_report: build/ios/test/*.xml
+    publishing:
+      email:
+        recipients:
+          - atif.saeed@systemsltd.com
+         
   ios-mva-test-one:
     name: MVA Test One 
     max_build_duration: 120
@@ -34,13 +61,6 @@ workflows:
       # - name: Install CocoaPods dependencies
       #   script: | 
       #     pod install
-      - name: iOS test
-        script: |
-          xcode-project run-tests \
-            --workspace "$XCODE_PROJECT" \
-            --scheme "$XCODE_SCHEME" \
-            --device "iPhone 11"
-      test_report: build/ios/test/*.xml
       - name: Set up provisioning profiles settings on Xcode project
         script: xcode-project use-profiles
                         # --custom-export-options='{"testFlightInternalTestingOnly": true}'  

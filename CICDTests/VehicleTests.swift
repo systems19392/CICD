@@ -44,9 +44,15 @@ final class VehicleTests: XCTestCase {
         boeing.startEngine(minutes: minutes)
         
         //Assert
+        XCTAssertNotNil(mercedes)
+        // XCTAssertEqual(boeing.returnMiles(), mercedes.returnMiles())
         XCTAssertTrue(boeing.returnMiles() > mercedes.returnMiles())
     }
 
+    func testMath() {
+        XCTAssertEqual(9+2,11)
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
