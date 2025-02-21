@@ -16,6 +16,9 @@
 		51755C382D64A50B008D654D /* CICDUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51755C372D64A50B008D654D /* CICDUITests.swift */; };
 		51755C3A2D64A50B008D654D /* CICDUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51755C392D64A50B008D654D /* CICDUITestsLaunchTests.swift */; };
 		51755C492D64B059008D654D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 51755C482D64B059008D654D /* README.md */; };
+		51755C4C2D68C22F008D654D /* VehicleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51755C4B2D68C22F008D654D /* VehicleModel.swift */; };
+		51755C4D2D68C22F008D654D /* VehicleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51755C4B2D68C22F008D654D /* VehicleModel.swift */; };
+		51755C4F2D68C2B6008D654D /* VehicleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51755C4E2D68C2B6008D654D /* VehicleTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,8 @@
 		51755C392D64A50B008D654D /* CICDUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICDUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		51755C482D64B059008D654D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		51755C4A2D67457B008D654D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		51755C4B2D68C22F008D654D /* VehicleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleModel.swift; sourceTree = "<group>"; };
+		51755C4E2D68C2B6008D654D /* VehicleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +109,7 @@
 				51755C1A2D64A509008D654D /* CICDApp.swift */,
 				51755C1C2D64A509008D654D /* ContentView.swift */,
 				51755C1E2D64A509008D654D /* Item.swift */,
+				51755C4B2D68C22F008D654D /* VehicleModel.swift */,
 				51755C202D64A50A008D654D /* Assets.xcassets */,
 				51755C222D64A50A008D654D /* Preview Content */,
 			);
@@ -122,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				51755C2D2D64A50B008D654D /* CICDTests.swift */,
+				51755C4E2D68C2B6008D654D /* VehicleTests.swift */,
 			);
 			path = CICDTests;
 			sourceTree = "<group>";
@@ -268,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51755C1D2D64A509008D654D /* ContentView.swift in Sources */,
+				51755C4C2D68C22F008D654D /* VehicleModel.swift in Sources */,
 				51755C1F2D64A509008D654D /* Item.swift in Sources */,
 				51755C1B2D64A509008D654D /* CICDApp.swift in Sources */,
 			);
@@ -278,6 +286,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				51755C2E2D64A50B008D654D /* CICDTests.swift in Sources */,
+				51755C4D2D68C22F008D654D /* VehicleModel.swift in Sources */,
+				51755C4F2D68C2B6008D654D /* VehicleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,7 +459,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 10.12.2;
 				PRODUCT_BUNDLE_IDENTIFIER = qa.vodafone.mcare.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -484,7 +494,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 10.12.2;
 				PRODUCT_BUNDLE_IDENTIFIER = qa.vodafone.mcare.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
