@@ -6,7 +6,7 @@ workflows:
         BUNDLE_ID: "qa.vodafone.mcare.test1"
         XCODE_PROJECT: "CICD.xcodeproj"
         XCODE_SCHEME: "CICD"
-      xcode: latest # Set to a specific version like "15.0" if needed.
+      xcode: latest # Use a specific version if required (e.g., 15.0).
     scripts:
       - name: iOS test
         script: |
@@ -14,7 +14,9 @@ workflows:
             --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
             --scheme "$XCODE_SCHEME" \
             --device "iPhone 11"
-    test_report: build/ios/test/*.xml
+    artifacts:
+      - build/ios/test/*.xml
+      - /tmp/xcodebuild_logs/*.log
     # publishing:
     #   email:
     #     recipients:
