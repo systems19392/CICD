@@ -4,36 +4,21 @@ workflows:
     environment:
       vars:
         BUNDLE_ID: "qa.vodafone.mcare.test1"
-        # XCODE_PROJECT: "CICD.xcworkspace"
         XCODE_PROJECT: "CICD.xcodeproj"
         XCODE_SCHEME: "CICD"
-        # APP_STORE_APPLE_ID: 1480230006
-      xcode: latest # <-- set to specific version e.g. 14.3, 15.0 to avoid unexpected updates.
-      # cocoapods: default
-    triggering:
-      events:
-        - push
-        # - tag
-        # - pull_request
-      branch_patterns:
-        - pattern: 'current'
-          include: true
-          source: true
+      xcode: latest # Set to a specific version like "15.0" if needed.
     scripts:
-      # - name: Install CocoaPods dependencies
-      #   script: | 
-      #     pod install
       - name: iOS test
         script: |
           xcode-project run-tests \
-            --CICD.xcodeproj \
-            --scheme CICD \
+            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME" \
             --device "iPhone 11"
-      test_report: build/ios/test/*.xml
-    publishing:
-      email:
-        recipients:
-          - atif.saeed@systemsltd.com
+    test_report: build/ios/test/*.xml
+    # publishing:
+    #   email:
+    #     recipients:
+    #       - atif.saeed@systemsltd.com
          
   ios-mva-test-one:
     name: MVA Test One 
