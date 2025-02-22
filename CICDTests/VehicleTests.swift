@@ -46,7 +46,7 @@ final class VehicleTests: XCTestCase {
         //Assert
         XCTAssertNotNil(mercedes)
         // XCTAssertEqual(boeing.returnMiles(), mercedes.returnMiles())
-        XCTAssertTrue(boeing.returnMiles() > mercedes.returnMiles())
+        XCTAssertTrue(boeing.returnMiles() < mercedes.returnMiles())
     }
 
     func testMath() {
