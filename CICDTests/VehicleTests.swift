@@ -27,37 +27,39 @@ final class VehicleTests: XCTestCase {
         boeing = nil
     }
 
-    func testExample() throws {
+    /* func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         // Any test you write for XCTest can be annotated as throws and async.
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
+    } */
     
     func testPlaneFasterThanCar() {
-        //Act
+        // Act
         let minutes = 60
         
-        //Arrenge
+        // Arrenge
         mercedes.startEngine(minutes: minutes)
         boeing.startEngine(minutes: minutes)
         
-        //Assert
+        // Assert
         XCTAssertNotNil(mercedes)
-        // XCTAssertEqual(boeing.returnMiles(), mercedes.returnMiles())
-        XCTAssertTrue(boeing.returnMiles() < mercedes.returnMiles())
+        // CTAssertEqual(boeing.returnMiles(), mercedes.returnMiles())
+        XCTAssertTrue(boeing.returnMiles() > mercedes.returnMiles())
     }
 
     func testMath() {
-        XCTAssertEqual(9+2,11)
+        measure {
+            XCTAssertEqual(9 + 2, 11)
+        }
     }
     
-    func testPerformanceExample() throws {
+    /* func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
             // Put the code you want to measure the time of here.
         }
-    }
+    } */
 
 }
