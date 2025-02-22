@@ -13,7 +13,7 @@ workflows:
           xcode-project run-tests \
             --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
             --scheme "$XCODE_SCHEME" \
-            --device "iPhone 11"
+            # --device "iPhone 11"
     artifacts:
       - build/ios/test/*.xml
       - /tmp/xcodebuild_logs/*.log
