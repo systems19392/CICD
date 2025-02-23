@@ -62,8 +62,9 @@ workflows:
 
       - name: Generate release notes
         script: |
-          echo "🚀 New build from Codemagic!" > release_notes.txt
-          git log -1 --pretty=format:"🔖 %s - %an" >> release_notes.txt
+          # echo "🚀 New build from Codemagic!" > release_notes.txt
+          # git log -1 --pretty=format:"🔖 %s - %an" >> release_notes.txt
+          git log -1 --pretty=format:"%s - %an" >> release_notes.txt
           export RELEASE_NOTES=$(cat release_notes.txt)
           echo "RELEASE_NOTES=$RELEASE_NOTES" >> $CM_ENV
 
