@@ -1,0 +1,140 @@
+workflows:
+  
+  # ios-mva-test-one-cases:
+  #   name: MVA Test One Cases 
+  #   environment:
+  #     vars:
+  #       BUNDLE_ID: "qa.vodafone.mcare.test1"
+  #       XCODE_PROJECT: "CICD.xcodeproj"
+  #       XCODE_SCHEME: "CICD"
+  #     xcode: latest # Use a specific version if required (e.g., 15.0).
+  #   scripts:
+  #     - name: iOS test
+  #       script: |
+  #         xcode-project run-tests \
+  #           --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+  #           --scheme "$XCODE_SCHEME" \
+  #           # --device "iPhone 11"
+  #   artifacts:
+  #     - build/ios/test/*.xml
+  #     - /tmp/xcodebuild_logs/*.log
+    # publishing:
+    #   email:
+    #     recipients:
+    #       - atif.saeed@systemsltd.com
+         
+  ios-mva-test-one:
+    name: MVA Test One 
+    max_build_duration: 120
+    instance_type: mac_mini_m2
+
+    integrations:
+      app_store_connect: MVA AppStore Connect
+
+    environment:
+      ios_signing:
+        # provisioning_profiles:
+        #   - YourAppProfile.mobileprovision
+        # certificates:
+        #   - ios_distribution.p12
+        distribution_type: app_store # possible values: app_store | ad_hoc | development | enterprise
+        bundle_identifier: qa.vodafone.mcare.test1
+      vars:
+        BUNDLE_ID: "qa.vodafone.mcare.test1"
+        # XCODE_PROJECT: "CICD.xcworkspace"
+        XCODE_PROJECT: "CICD.xcodeproj"
+        XCODE_SCHEME: "CICD"
+        APP_STORE_APPLE_ID: 1480230006
+      xcode: latest # pin a specific version e.g. 14.3, 15.0 to avoid unexpected updates.
+      # cocoapods: default
+
+    triggering:
+        events:
+          - push
+          # - tag
+          - pull_request
+        branch_patterns:
+          - pattern: 'current'
+            include: true
+            source: true
+
+    scripts:
+      # - name: Install CocoaPods dependencies
+      #   script: | 
+      #     pod install
+      # - name: iOS test
+      #   script: |
+      #     xcode-project run-tests \
+      #       --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+      #       --scheme "$XCODE_SCHEME" \
+      #       # --device "iPhone 15"
+
+      - name: Set up provisioning profiles
+        script: |
+          xcode-project use-profiles
+
+      - name: Increment build number
+        script: |
+          cd $CM_BUILD_DIR
+          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build-number "$APP_STORE_APPLE_ID" || echo 0)
+          NEW_BUILD_NUMBER=$((LATEST_BUILD_NUMBER + 1))
+          echo "🔢 New build number: $NEW_BUILD_NUMBER"
+          agvtool new-version -all $NEW_BUILD_NUMBER
+
+      - name: Build ipa for distribution
+        script: |
+          xcode-project build-ipa \
+            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME" \
+            --verbose  # enables detailed logs for debugging
+    artifacts:
+      - build/ios/test/*.xml
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log  
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+
+    publishing:
+
+      slack:
+        channel: '#general'
+        # channel: "#build-notifications"
+        notify_on_build_start: false # To receive a notification when a build starts
+        notify:
+          success: true # To not receive a notification when a build succeeds
+          failure: true # To not receive a notification when a build fails
+        preformatted_text: |
+            🚀 Build Status: ${CM_BUILD_STATUS}
+            🧑‍💻 Committer: ${CM_COMMIT_AUTHOR}
+            🔖 Commit: ${CM_COMMIT}
+            📦 Build: ${CM_BUILD_ID}
+
+      email:
+        recipients:
+          - atif.saeed@systemsltd.com
+          # - atifsaeed14@gmail.com
+        notify:
+          success: true
+          failure: true
+          
+      # app_store_connect:
+      #   auth: integration
+
+          # release_notes: |
+          #   🚀 **New Features:**
+          #   - Enhanced user experience for onboarding.
+          #   - Improved performance in customer verification.
+          #   🐞 **Bug Fixes:**
+          #   - Fixed an issue with Face ID authentication.
+          #   - Resolved layout issues on iPhone 15.
+
+    #     # Configuration related to TestFlight (optional)
+    #     # Note: This action is performed during post-processing.
+        # submit_to_testflight: true
+    #     # beta_groups: # Specify the names of beta tester groups that will get access to the build once it has passed beta review.
+    #     #   - Internal Testers
+    #     #   - QA Team
+
+    #     # Configuration related to App Store (optional)
+    #     # Note: This action is performed during post-processing.
+    #     submit_to_app_store: false
