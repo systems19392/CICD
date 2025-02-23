@@ -129,11 +129,11 @@ workflows:
           
       app_store_connect:
         auth: integration
-        release_notes: $RELEASE_NOTES
-        submit_to_testflight: true
-        beta_groups:
-          - Internal Testers
-        submit_to_app_store: false
+        # release_notes: $RELEASE_NOTES
+        # submit_to_testflight: true
+        # beta_groups:
+        #   - Internal Testers
+        # submit_to_app_store: false
 
           # release_notes: |
           #   🚀 **New Features:**
