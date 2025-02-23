@@ -1,5 +1,5 @@
 workflows:
-  
+
   # ios-mva-test-one-cases:
   #   name: MVA Test One Cases 
   #   environment:
@@ -52,22 +52,29 @@ workflows:
         events:
           - push
           # - tag
-          - pull_request
+          - pull_request 
         branch_patterns:
-          - pattern: 'current'
+          - pattern: 'current' # "*" trigger on All Branches
             include: true
             source: true
 
     scripts:
+
+      - name: Generate release notes
+        script: |
+          echo "🚀 New build from Codemagic!" > release_notes.txt
+          git log -1 --pretty=format:"🔖 %s - %an" >> release_notes.txt
+
       # - name: Install CocoaPods dependencies
       #   script: | 
       #     pod install
-      # - name: iOS test
-      #   script: |
-      #     xcode-project run-tests \
-      #       --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
-      #       --scheme "$XCODE_SCHEME" \
-      #       # --device "iPhone 15"
+          
+      - name: iOS test
+        script: |
+          xcode-project run-tests \
+            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME" \
+            # --device "iPhone 15"
 
       - name: Set up provisioning profiles
         script: |
@@ -87,6 +94,7 @@ workflows:
             --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
             --scheme "$XCODE_SCHEME" \
             --verbose  # enables detailed logs for debugging
+
     artifacts:
       - build/ios/test/*.xml
       - build/ios/ipa/*.ipa
@@ -117,8 +125,10 @@ workflows:
           success: true
           failure: true
           
-      # app_store_connect:
-      #   auth: integration
+      app_store_connect:
+        auth: integration
+
+          release_notes: "$(cat release_notes.txt)"
 
           # release_notes: |
           #   🚀 **New Features:**
