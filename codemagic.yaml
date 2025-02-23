@@ -64,11 +64,13 @@ workflows:
         script: |
           echo "🚀 New build from Codemagic!" > release_notes.txt
           git log -1 --pretty=format:"🔖 %s - %an" >> release_notes.txt
+          export RELEASE_NOTES=$(cat release_notes.txt)
+          echo "RELEASE_NOTES=$RELEASE_NOTES" >> $CM_ENV
 
       # - name: Install CocoaPods dependencies
       #   script: | 
       #     pod install
-          
+
       - name: iOS test
         script: |
           xcode-project run-tests \
@@ -128,7 +130,7 @@ workflows:
       app_store_connect:
         auth: integration
 
-          release_notes: "$(cat release_notes.txt)"
+          release_notes: $RELEASE_NOTES
 
           # release_notes: |
           #   🚀 **New Features:**
