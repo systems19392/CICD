@@ -130,7 +130,7 @@ workflows:
       app_store_connect:
         auth: integration
 
-          release_notes: $RELEASE_NOTES
+        release_notes: $RELEASE_NOTES
 
           # release_notes: |
           #   🚀 **New Features:**
