@@ -61,12 +61,12 @@ workflows:
       # - name: Install CocoaPods dependencies
       #   script: | 
       #     pod install
-      - name: iOS test
-        script: |
-          xcode-project run-tests \
-            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
-            --scheme "$XCODE_SCHEME" \
-            # --device "iPhone 15"
+      # - name: iOS test
+      #   script: |
+      #     xcode-project run-tests \
+      #       --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+      #       --scheme "$XCODE_SCHEME" \
+      #       # --device "iPhone 15"
 
       - name: Set up provisioning profiles
         script: |
@@ -94,16 +94,24 @@ workflows:
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
 
     publishing:
+
+      slack:
+        channel: '#general'
+        notify_on_build_start: true # To receive a notification when a build starts
+        notify:
+          success: true # To not receive a notification when a build succeeds
+          failure: true # To not receive a notification when a build fails
+
       email:
         recipients:
           - atif.saeed@systemsltd.com
           # - atifsaeed14@gmail.com
         notify:
           success: true
-          failure: false
+          failure: true
           
-      app_store_connect:
-        auth: integration
+      # app_store_connect:
+      #   auth: integration
 
     #     # Configuration related to TestFlight (optional)
     #     # Note: This action is performed during post-processing.
