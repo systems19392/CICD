@@ -133,7 +133,6 @@ workflows:
         # submit_to_testflight: true
         # beta_groups:
         #   - Internal Testers
-        # submit_to_app_store: false
 
           # release_notes: |
           #   🚀 **New Features:**
