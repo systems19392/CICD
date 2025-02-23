@@ -113,11 +113,11 @@ workflows:
         notify:
           success: true # To not receive a notification when a build succeeds
           failure: true # To not receive a notification when a build fails
-        preformatted_text: |
-            🚀 Build Status: ${CM_BUILD_STATUS}
-            🧑‍💻 Committer: ${CM_COMMIT_AUTHOR}
-            🔖 Commit: ${CM_COMMIT}
-            📦 Build: ${CM_BUILD_ID}
+        text: |
+          🚀 *Build Status:* ${CM_BUILD_STATUS}
+          🧑‍💻 *Committer:* ${CM_COMMIT_AUTHOR}
+          🔖 *Commit:* ${CM_COMMIT}
+          📦 *Build:* ${CM_BUILD_ID}
 
       email:
         recipients:
