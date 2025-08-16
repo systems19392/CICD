@@ -48,15 +48,15 @@ workflows:
       xcode: latest # pin a specific version e.g. 14.3, 15.0 to avoid unexpected updates.
       # cocoapods: default
 
-    triggering:
-        events:
-          - push
-          # - tag
-          - pull_request 
-        branch_patterns:
-          - pattern: 'current' # "*" trigger on All Branches
-            include: true
-            source: true
+    # triggering:
+    #     events:
+    #       - push
+    #       # - tag
+    #       - pull_request 
+    #     branch_patterns:
+    #       - pattern: 'current' # "*" trigger on All Branches
+    #         include: true
+    #         source: true
 
     scripts:
 
@@ -131,7 +131,7 @@ workflows:
       app_store_connect:
         auth: integration
         # release_notes: $RELEASE_NOTES
-        # submit_to_testflight: true
+        submit_to_testflight: true
         # beta_groups:
         #   - Internal Testers
 
